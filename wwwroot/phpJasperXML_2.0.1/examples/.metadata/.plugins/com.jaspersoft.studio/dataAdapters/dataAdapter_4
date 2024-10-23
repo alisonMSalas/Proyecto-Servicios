@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><jdbcDataAdapter class="net.sf.jasperreports.data.jdbc.JdbcDataAdapterImpl">
+  <name>Pruebas</name>
+  <driver>org.mariadb.jdbc.Driver</driver>
+  <username>root</username>
+  <password>humanes</password>
+  <url>jdbc:mariadb://localhost:3306/pruebas</url>
+  <database/>
+  <savePassword>true</savePassword>
+  <serverAddress/>
+</jdbcDataAdapter>

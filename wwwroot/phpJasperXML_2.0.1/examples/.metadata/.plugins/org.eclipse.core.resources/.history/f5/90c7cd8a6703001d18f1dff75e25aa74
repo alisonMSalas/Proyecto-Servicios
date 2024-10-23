@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="paises" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="40031e2a-3ea8-433b-bcee-bd919098c97c">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Report"/>
+	<parameter name="P_records" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Conjunto de Provincias]]></parameterDescription>
+		<defaultValueExpression><![CDATA["01"]]></defaultValueExpression>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[SELECT NombreProvincia,CodigoMunicipio, NombreMunicipio
+FROM rp_provincia p join rp_municipio m on (p.CodigoProvincia = m.CodigoProvincia)
+where p.CodigoProvincia in ($P{P_records})]]>
+	</queryString>
+	<field name="NombreProvincia" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="NombreProvincia"/>
+		<property name="com.jaspersoft.studio.field.label" value="NombreProvincia"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="rp_provincia"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CodigoMunicipio" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="CodigoMunicipio"/>
+		<property name="com.jaspersoft.studio.field.label" value="CodigoMunicipio"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="rp_municipio"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NombreMunicipio" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="NombreMunicipio"/>
+		<property name="com.jaspersoft.studio.field.label" value="NombreMunicipio"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="rp_municipio"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<group name="Provincia" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{NombreProvincia}]]></groupExpression>
+		<groupHeader>
+			<band height="19">
+				<printWhenExpression><![CDATA[1== 2]]></printWhenExpression>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="7">
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="66" splitType="Stretch">
+			<staticText>
+				<reportElement x="190" y="0" width="169" height="30" uuid="00841ee8-e283-47d7-a28f-1bc6ab8989f1"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Listado de Provincias]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="453" y="20" width="100" height="20" uuid="0b442793-ca0c-459e-82dc-cd59086e9c8f"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="401" y="20" width="52" height="20" uuid="36868341-9824-4cf0-80bd-83db2f1a45d0"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha: ]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="60" height="40" uuid="ba447b0d-d29a-4518-b741-d1dabf84ce55"/>
+				<imageExpression><![CDATA["https://fhumanes.com/_imagenes/simit.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="134" y="33" width="190" height="16" uuid="d2682e1b-3c91-42ed-8d97-ffe638fdf113"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NombreProvincia}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="60" y="33" width="74" height="16" uuid="f516c2e0-f373-4dd0-8cb8-6b72be760e49">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Provincia: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="49" width="60" height="16" uuid="a65413f7-b25a-45f3-8b6d-4422e454b20e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d566c32e-230b-41bc-900a-0244fddf5af6"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0" lineStyle="Dotted"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Código]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="60" y="49" width="270" height="16" uuid="cda99789-76c4-455b-b7c6-fa8a477bbfa3">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="50c8b7a5-268e-48d6-8233-97c8c5ffe781"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0" lineStyle="Dotted"/>
+				</box>
+				<text><![CDATA[Nombre del Municipio]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField>
+				<reportElement x="0" y="0" width="60" height="16" uuid="5c99157b-8108-4b8e-bdb2-9d189634e028">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d566c32e-230b-41bc-900a-0244fddf5af6"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{CodigoMunicipio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="60" y="0" width="270" height="16" uuid="07c50e1f-1d72-48b0-a61f-311bcc109c5a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="50c8b7a5-268e-48d6-8233-97c8c5ffe781"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{NombreMunicipio}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="31" splitType="Stretch">
+			<textField>
+				<reportElement x="400" y="0" width="100" height="16" uuid="7cd142d7-d6d2-4bce-8037-d25c7fe446b4"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página:  " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="500" y="1" width="50" height="16" uuid="226d0bc9-1e49-4ae3-a8d1-70a079f27e33">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" de " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

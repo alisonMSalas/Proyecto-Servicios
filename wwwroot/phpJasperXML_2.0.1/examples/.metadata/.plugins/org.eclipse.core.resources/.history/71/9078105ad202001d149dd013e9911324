@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="municipios" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9005aa73-a2cd-4cc3-851b-ed2ac82d01f7">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Report"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+rp_provincia.`idrp_provincia`,
+rp_provincia.`CodigoProvincia`,
+rp_provincia.`NombreProvincia`,
+rp_municipio.`idrp_municipio`,
+-- rp_municipio.`CodigoProvincia`,
+rp_municipio.`CodigoMunicipio`,
+rp_municipio.`NombreMunicipio`
+
+FROM rp_municipio
+JOIN rp_provincia on (rp_provincia.`CodigoProvincia` = rp_municipio.`CodigoProvincia`)
+order by rp_provincia.`CodigoProvincia`]]>
+	</queryString>
+	<field name="idrp_provincia" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="idrp_provincia"/>
+		<property name="com.jaspersoft.studio.field.label" value="idrp_provincia"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="rp_provincia"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CodigoProvincia" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="CodigoProvincia"/>
+		<property name="com.jaspersoft.studio.field.label" value="CodigoProvincia"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="rp_provincia"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NombreProvincia" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="NombreProvincia"/>
+		<property name="com.jaspersoft.studio.field.label" value="NombreProvincia"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="rp_provincia"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="idrp_municipio" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="idrp_municipio"/>
+		<property name="com.jaspersoft.studio.field.label" value="idrp_municipio"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="rp_municipio"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CodigoMunicipio" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="CodigoMunicipio"/>
+		<property name="com.jaspersoft.studio.field.label" value="CodigoMunicipio"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="rp_municipio"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NombreMunicipio" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="NombreMunicipio"/>
+		<property name="com.jaspersoft.studio.field.label" value="NombreMunicipio"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="rp_municipio"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<group name="CodigoProvincia">
+		<groupExpression><![CDATA[$F{CodigoProvincia}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

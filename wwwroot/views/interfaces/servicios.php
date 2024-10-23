@@ -15,8 +15,8 @@
 <body>
 
     <table id="dg" title="Estudiantes" class="easyui-datagrid" style="width:98%;height:350px"
-        url="http://localhost:8081/proyectoQuinto/Proyecto-Servicios/wwwroot/controllers/apiRest.php" toolbar="#toolbar"
-        pagination="true" rownumbers="true" fitColumns="true" singleSelect="true" method="GET">
+        url="http://localhost:8081/ProyectoServicios/Proyecto-Servicios/wwwroot/controllers/apiRest.php"
+        toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true" method="GET">
         <thead>
             <tr>
                 <th field="estCedula" width="50">Cedula</th>
@@ -71,16 +71,19 @@
     <div id="dlg-buttons">
         <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveUser()"
             style="width:90px">Guardar</a>
+
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel"
             onclick="javascript:$('#dlg').dialog('close')" style="width:90px">Cancelar</a>
     </div>
     <script type="text/javascript">
         var url;
+        var metodo;
         function newUser() {
             $('#dlg').dialog('open').dialog('center').dialog('setTitle', 'Nuevo Estudiante');
             $('#fm').form('clear');
             cargarCursos();
-            url = 'http://localhost:8081/proyectoQuinto/Proyecto-Servicios/wwwroot/controllers/apiRest.php';
+            url = "http://localhost:8081/ProyectoServicios/Proyecto-Servicios/wwwroot/controllers/apiRest.php";
+            metodo = 'POST'
         }
         function editUser() {
             var row = $('#dg').datagrid('getSelected');
@@ -88,48 +91,72 @@
             if (row) {
                 $('#dlg').dialog('open').dialog('center').dialog('setTitle', 'Editar Usuario');
                 $('#fm').form('load', row);
-                console.log("-----------" + row.curId);
 
-                url = 'http://localhost:8081/proyectoQuinto/Proyecto-Servicios/wwwroot/controllers/apiRest.php?cedula=' + row.estCedula;
+                url = "http://localhost:8081/ProyectoServicios/Proyecto-Servicios/wwwroot/controllers/apiRest.php?estCedula=" + row.estCedula;
+                metodo = 'PUT'
             }
         }
         function saveUser() {
-            $('#fm').form('submit', {
+            var formData = $('#fm').serialize();
+            $.ajax({
                 url: url,
-                iframe: false,
-                onSubmit: function () {
-                    return $(this).form('validate');
-                },
+                method: metodo,  // El método puede ser 'POST' o 'PUT', dependiendo de la acción
+                data: formData,
                 success: function (result) {
-                    var result = eval('(' + result + ')');
-                    if (result.errorMsg) {
+                    try {
+                        var parsedResult = JSON.parse(result);
+                        if (parsedResult.errorMsg) {
+                            $.messager.show({
+                                title: 'Error',
+                                msg: parsedResult.errorMsg
+                            });
+                        } else {
+                            $('#dlg').dialog('close');  // Cerrar el diálogo si es exitoso
+                            $('#dg').datagrid('reload');  // Recargar los datos
+                        }
+                    } catch (error) {
                         $.messager.show({
                             title: 'Error',
-                            msg: result.errorMsg
+                            msg: 'Error al procesar la respuesta del servidor.'
                         });
-                    } else {
-                        $('#dlg').dialog('close');
-                        $('#dg').datagrid('reload');
                     }
+                },
+                error: function (xhr, status, error) {
+                    $.messager.show({
+                        title: 'Error',
+                        msg: 'Error en la solicitud.'
+                    });
                 }
             });
         }
+
 
         function destroyUser() {
             var row = $('#dg').datagrid('getSelected');
             if (row) {
                 $.messager.confirm('Confirmar', 'Estas seguro de eliminar?', function (r) {
                     if (r) {
-                        $.post('model/borrar.php', { cedula: row.est_cedula }, function (result) {
-                            if (!result.success) {
-                                $('#dg').datagrid('reload');    // reload the user data
-                            } else {
-                                $.messager.show({    // show error message
-                                    title: 'Error',
-                                    msg: result.errorMsg
-                                });
+
+                        $.ajax({
+                            url: "http://localhost:8081/ProyectoServicios/Proyecto-Servicios/wwwroot/controllers/apiRest.php?estCedula=" + row.estCedula,
+                            method: 'DELETE',
+                            success: function (result) {
+                                if (!result.success) {
+                                    $.messager.show({
+                                        title: 'Success',
+                                        msg: 'El estudiante se ha eliminado.'
+                                    });
+                                    $('#dg').datagrid('reload');
+                                } else {
+                                    $.messager.show({
+                                        title: 'Error',
+                                        msg: result.errorMsg
+                                    });
+                                }
                             }
-                        }, 'json');
+
+                        })
+
                     }
                 });
             }
@@ -137,7 +164,7 @@
 
         async function cargarCursos() {
             try {
-                let response = await fetch('http://localhost:8081/proyectoQuinto/Proyecto-Servicios/wwwroot/controllers/apiRest.php?cursos');
+                let response = await fetch("http://localhost:8081/ProyectoServicios/Proyecto-Servicios/wwwroot/controllers/apiRest.php?cursos");
                 let data = await response.json();
                 $('#cur').combobox({
                     valueField: 'curId',
@@ -148,7 +175,7 @@
                 console.error('Error al cargar los cursos:', error);
             }
         }
-        /*
+        
         function cargarReporte() {
             window.location.href = 'reportes/reporte.php'
         }
@@ -159,12 +186,12 @@
 
             if (row) {
                 console.log(row.est_cedula);
-                window.open('reportes/reporteIndividual.php?est_cedula=' + row.est_cedula)
+                window.open('reportes/reporteUnico.php?estCedula=' + row.estCedula)
             }
         }
         function generarInforme() {
             window.open("phpJasperXML_2.0.1/examples/ireport.php")
-        }*/
+        }
 
     </script>
 

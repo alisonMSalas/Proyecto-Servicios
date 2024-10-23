@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="paises" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="40031e2a-3ea8-433b-bcee-bd919098c97c">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Report"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT CodigoProvincia, NombreProvincia FROM rp_provincia order by 1]]>
+	</queryString>
+	<field name="CodigoProvincia" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="CodigoProvincia"/>
+		<property name="com.jaspersoft.studio.field.label" value="CodigoProvincia"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="rp_provincia"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NombreProvincia" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="NombreProvincia"/>
+		<property name="com.jaspersoft.studio.field.label" value="NombreProvincia"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="rp_provincia"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="45" splitType="Stretch">
+			<staticText>
+				<reportElement x="190" y="0" width="169" height="30" uuid="00841ee8-e283-47d7-a28f-1bc6ab8989f1"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Listado de Provincias]]></text>
+			</staticText>
+			<textField pattern="d/M/yy">
+				<reportElement x="453" y="20" width="100" height="20" uuid="0b442793-ca0c-459e-82dc-cd59086e9c8f"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="401" y="20" width="52" height="20" uuid="36868341-9824-4cf0-80bd-83db2f1a45d0"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha: ]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="90" height="40" uuid="ba447b0d-d29a-4518-b741-d1dabf84ce55"/>
+				<imageExpression><![CDATA["https://fhumanes.com/_imagenes/simit.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="16" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="-20" y="0" width="70" height="16" uuid="82486760-01b9-4b37-b5be-ef984390dd2a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d208e59d-f34c-45f6-ae71-835b9cfe7ce2"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0" lineStyle="Dotted"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Código]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="50" y="0" width="320" height="16" uuid="6d04c09d-da5b-4627-accc-7836ff202fb9">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e5194626-c66b-416b-be8a-4e277f12a497"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0" lineStyle="Dotted"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre de la provincia]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField>
+				<reportElement x="-20" y="0" width="70" height="16" uuid="21073196-b665-43b5-997b-ce5405985cf5">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d208e59d-f34c-45f6-ae71-835b9cfe7ce2"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{CodigoProvincia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="50" y="0" width="320" height="16" uuid="574ec772-cd4b-4116-af3c-d62e221d9f83">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e5194626-c66b-416b-be8a-4e277f12a497"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{NombreProvincia}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="31" splitType="Stretch">
+			<textField>
+				<reportElement x="400" y="0" width="100" height="16" uuid="7cd142d7-d6d2-4bce-8037-d25c7fe446b4"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página:  " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="500" y="1" width="50" height="16" uuid="226d0bc9-1e49-4ae3-a8d1-70a079f27e33">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" de " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

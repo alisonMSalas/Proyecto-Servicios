@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.19.1.final using JasperReports Library version 6.19.1-867c00bf88cd4d784d404379d6c05e1b419e8a4c  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="labels" pageWidth="283" pageHeight="141" orientation="Landscape" columnWidth="275" leftMargin="4" rightMargin="4" topMargin="4" bottomMargin="4" isIgnorePagination="true" uuid="f9b22fa1-dfd5-4952-8a77-eda27fc1369b">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Pruebas"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="P1" class="java.lang.Integer" isForPrompting="false">
+		<defaultValueExpression><![CDATA[1]]></defaultValueExpression>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[SELECT `id_PDF_labels`,
+	name,
+	code,
+	url_qr,
+	description
+FROM pruebas.pdf_labels
+where  `id_PDF_labels` =  $P{P1} ]]>
+	</queryString>
+	<field name="id_PDF_labels" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="id_PDF_labels"/>
+		<property name="com.jaspersoft.studio.field.label" value="id_PDF_labels"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pdf_labels"/>
+	</field>
+	<field name="name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="name"/>
+		<property name="com.jaspersoft.studio.field.label" value="name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pdf_labels"/>
+	</field>
+	<field name="code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="code"/>
+		<property name="com.jaspersoft.studio.field.label" value="code"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pdf_labels"/>
+	</field>
+	<field name="url_qr" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="url_qr"/>
+		<property name="com.jaspersoft.studio.field.label" value="url_qr"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pdf_labels"/>
+	</field>
+	<field name="description" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="description"/>
+		<property name="com.jaspersoft.studio.field.label" value="description"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pdf_labels"/>
+	</field>
+	<pageHeader>
+		<band height="2">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="113" splitType="Stretch">
+			<property name="com.jaspersoft.studio.layout"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<rectangle radius="3">
+				<reportElement x="8" y="1" width="260" height="112" uuid="0c01ba18-b20e-471e-9857-c867aae33494">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.25" lineStyle="Dotted" lineColor="#0D0C0C"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="146" y="70" width="122" height="15" uuid="28ad2d06-c47c-4a8b-af14-ce90560db65b">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="8" y="1" width="160" height="15" uuid="0651fbb9-b3d3-45ed-b190-e4c9b2e88c80">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="8" y="26" width="100" height="15" uuid="c16f638f-7fe6-4fe0-95f2-9be818103ad4">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="8" y="48" width="160" height="15" uuid="91bc114e-cf1a-4a59-813d-28890d11d526">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{url_qr}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="190" y="0" width="60" height="63" uuid="fdcf28da-091a-4c1b-9fc6-dd9dfbeb51a4"/>
+				<jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<jr:codeExpression><![CDATA[$F{url_qr}]]></jr:codeExpression>
+				</jr:QRCode>
+			</componentElement>
+		</band>
+	</detail>
+</jasperReport>
