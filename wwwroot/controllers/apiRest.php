@@ -6,6 +6,7 @@ include '../models/borrar.php';
 include '../models/editar.php';
 include '../models/buscar.php';
 include '../models/cargarCursos.php';
+include '../models/login.php';
 $opc = $_SERVER['REQUEST_METHOD'];
 
 switch ($opc) {
@@ -19,7 +20,11 @@ switch ($opc) {
         }
         break;
     case 'POST':
-        CrudI::guardarEstudiantes();
+        if (isset($_POST['nombre_user'] )&& isset($_POST['contrasenia_user'])) {
+            Login::login();
+        } else {
+            CrudI::guardarEstudiantes();
+        }
         break;
     case 'DELETE':
         CrudD::eliminarEstudiante();

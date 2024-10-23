@@ -28,23 +28,17 @@
             </tr>
         </thead>
     </table>
+    
     <div id="toolbar">
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUser()">Nuevo
-            Estudiante</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true"
-            onclick="editUser()">Editar Estudiante</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true"
-            onclick="destroyUser()">Eliminar Estudiante</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true"
-            onclick="cargarReporte()">Reporte Completo</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true"
-            onclick="cargarReporteIndividual()">Reporte Individual</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true"
-            onclick="generarInforme()">Ireport</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUser()" id="btnNewUser">Nuevo Estudiante</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUser()" id="btnEditUser">Editar Estudiante</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyUser()" id="btnDestroyUser">Eliminar Estudiante</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="cargarReporte()">Reporte Completo</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="cargarReporteIndividual()">Reporte Individual</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="generarInforme()">Ireport</a>
     </div>
 
-    <div id="dlg" class="easyui-dialog" style="width:400px"
-        data-options="closed:true,modal:true,border:'thin',buttons:'#dlg-buttons'">
+    <div id="dlg" class="easyui-dialog" style="width:400px" data-options="closed:true,modal:true,border:'thin',buttons:'#dlg-buttons'">
         <form id="fm" method="post" novalidate style="margin:0;padding:20px 50px">
             <h3>Información Estudiante</h3>
             <div style="margin-bottom:10px">
@@ -63,21 +57,35 @@
                 <input name="estTelefono" class="easyui-textbox" required="true" label="Telefono" style="width:100%">
             </div>
             <div style="margin-bottom:10px">
-                <input id="cur" name="curId" class="easyui-combobox" required="true" label="Curso:" style="width:100%"
-                    prompt="Seleccione un curso">
+                <input id="cur" name="curId" class="easyui-combobox" required="true" label="Curso:" style="width:100%" prompt="Seleccione un curso">
             </div>
         </form>
     </div>
     <div id="dlg-buttons">
-        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveUser()"
-            style="width:90px">Guardar</a>
-
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel"
-            onclick="javascript:$('#dlg').dialog('close')" style="width:90px">Cancelar</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveUser()" style="width:90px">Guardar</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">Cancelar</a>
     </div>
+
     <script type="text/javascript">
         var url;
         var metodo;
+        
+        $(document).ready(function() {
+            checkAccess();
+        });
+
+        
+        function checkAccess() {
+            const accessKey = sessionStorage.getItem('accessKey'); 
+
+            if (!accessKey) {
+                $('#btnNewUser').hide();
+                $('#btnEditUser').hide();
+                $('#btnDestroyUser').hide();
+            }
+        }
+
+
         function newUser() {
             $('#dlg').dialog('open').dialog('center').dialog('setTitle', 'Nuevo Estudiante');
             $('#fm').form('clear');
@@ -85,6 +93,7 @@
             url = "http://localhost:8081/ProyectoServicios/Proyecto-Servicios/wwwroot/controllers/apiRest.php";
             metodo = 'POST'
         }
+
         function editUser() {
             var row = $('#dg').datagrid('getSelected');
 
@@ -96,11 +105,12 @@
                 metodo = 'PUT'
             }
         }
+
         function saveUser() {
             var formData = $('#fm').serialize();
             $.ajax({
                 url: url,
-                method: metodo,  // El método puede ser 'POST' o 'PUT', dependiendo de la acción
+                method: metodo, 
                 data: formData,
                 success: function (result) {
                     try {
@@ -111,8 +121,8 @@
                                 msg: parsedResult.errorMsg
                             });
                         } else {
-                            $('#dlg').dialog('close');  // Cerrar el diálogo si es exitoso
-                            $('#dg').datagrid('reload');  // Recargar los datos
+                            $('#dlg').dialog('close');  
+                            $('#dg').datagrid('reload');  
                         }
                     } catch (error) {
                         $.messager.show({
@@ -130,13 +140,11 @@
             });
         }
 
-
         function destroyUser() {
             var row = $('#dg').datagrid('getSelected');
             if (row) {
                 $.messager.confirm('Confirmar', 'Estas seguro de eliminar?', function (r) {
                     if (r) {
-
                         $.ajax({
                             url: "http://localhost:8081/ProyectoServicios/Proyecto-Servicios/wwwroot/controllers/apiRest.php?estCedula=" + row.estCedula,
                             method: 'DELETE',
@@ -154,9 +162,7 @@
                                     });
                                 }
                             }
-
                         })
-
                     }
                 });
             }
@@ -180,7 +186,6 @@
             window.location.href = 'reportes/reporte.php'
         }
 
-
         function cargarReporteIndividual() {
             var row = $('#dg').datagrid('getSelected');
 
@@ -189,6 +194,7 @@
                 window.open('reportes/reporteUnico.php?estCedula=' + row.estCedula)
             }
         }
+
         function generarInforme() {
             window.open("phpJasperXML_2.0.1/examples/ireport.php")
         }
