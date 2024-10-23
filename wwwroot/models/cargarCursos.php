@@ -1,19 +1,28 @@
 <?php
-include 'conexion.php';
+class CrudC
+{
 
-$sqlSelect = "SELECT * FROM cursos";
-$conn = new conexion();
-$conn = $conn->conectar();
-$respuesta = $conn->query($sqlSelect);
-$resultado= array();
-if ($respuesta->num_rows >0) {
-    while ($fila=$respuesta->fetch_array()) {
-        array_push($resultado,$fila);
+    public static function cargarCursos()
+    {
+        include 'conexion.php';
+
+        $sqlSelect = "SELECT * FROM cursos";
+        $conn = new conexion();
+        $conn = $conn->conectar();
+        $respuesta = $conn->query($sqlSelect);
+        $resultado = array();
+        if ($respuesta->num_rows > 0) {
+            while ($fila = $respuesta->fetch_array()) {
+                array_push($resultado, $fila);
+            }
+        } else {
+            $resultado = "No hay cursos";
+        }
+
+        echo json_encode($resultado);
     }
-}else{
-    $resultado = "No hay cursos";
+
+
 }
 
-echo json_encode ($resultado);
-
-?>
+//CrudC::cargarCursos();

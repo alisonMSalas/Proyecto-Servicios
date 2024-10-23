@@ -1,6 +1,6 @@
 <?php
 
-class Conexion
+/*class Conexion
 {
   private $serverName = "soa-quinto.database.windows.net";
   private $database = "soa-quinto";
@@ -15,13 +15,35 @@ class Conexion
       "PWD" => $this->password
     );
 
-    // Establecer la conexión
+    // Establecer la conexiï¿½n
     $conn = sqlsrv_connect($this->serverName, $connectionOptions);
 
-    // Verificar si la conexión fue exitosa
+    // Verificar si la conexiï¿½n fue exitosa
     if ($conn === false) {
       die(print_r(sqlsrv_errors(), true));
     }
+    return $conn;
+  }
+}*/
+
+
+class Conexion
+{
+  private $serverName = "localhost";
+  private $database = "cuarto";
+  private $username = "root";
+  private $password = "";
+
+  public function conectar()
+  {
+    // Establecer la conexiÃ³n
+    $conn = new mysqli($this->serverName, $this->username, $this->password, $this->database);
+
+    // Verificar si la conexiÃ³n fue exitosa
+    if ($conn->connect_error) {
+      die("Error de conexiÃ³n: " . $conn->connect_error);
+    }
+
     return $conn;
   }
 }
