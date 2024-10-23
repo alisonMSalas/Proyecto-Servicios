@@ -1,5 +1,5 @@
 <?php
-include 'conexion.php';
+/*include 'conexion.php';
 
 $sqlSelect = "SELECT e.estCedula, 
         e.estNombre, 
@@ -31,6 +31,48 @@ if ($conn) {
     sqlsrv_close($conn);
 }
 
-print_r(json_encode($resultado));
+print_r(json_encode($resultado));*/
+
+
+class CrudEstudiantes
+{
+    public static function seleccionarEstudiantes()
+    {
+        include_once 'conexion.php';
+        $sqlSelect = "SELECT e.estCedula, 
+        e.estNombre, 
+        e.estApellido, 
+        e.estTelefono, 
+        e.estDireccion, 
+        c.curNombre,
+        e.curId
+        FROM estudiantes e
+        JOIN cursos c ON e.curId = c.curId";
+
+        $con = new Conexion();
+        $conn = $con->conectar();
+
+        $resultado = array();
+
+        if ($conn) {
+            $stmt = $conn->query($sqlSelect);
+
+            if ($stmt === false) {
+                die("Error en la consulta: " . $conn->error);
+            }
+
+            while ($fila = $stmt->fetch_assoc()) {
+                array_push($resultado, $fila);
+            }
+
+            $stmt->close();
+            $conn->close();
+        }
+
+        print_r(json_encode($resultado));
+    }
+
+}
+
 
 ?>
