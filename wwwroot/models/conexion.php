@@ -29,10 +29,10 @@
 
 class Conexion
 {
-  private $serverName = "localhost";
-  private $database = "cuarto";
-  private $username = "root";
-  private $password = "";
+  private $serverName = "sql10.freesqldatabase.com";
+  private $database = "sql10740207";
+  private $username = "sql10740207";
+  private $password = "KPTwlzju9n";
 
   public function conectar()
   {
@@ -43,7 +43,7 @@ class Conexion
     if ($conn->connect_error) {
       die("Error de conexión: " . $conn->connect_error);
     }
-  
+
     return $conn;
   }
 }

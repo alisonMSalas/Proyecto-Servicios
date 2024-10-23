@@ -290,23 +290,22 @@
     </style>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-        $(document).ready(function() {
-        checkAccess(); // Verifica el acceso cuando la página se carga
-    });
 
-    function checkAccess() {
-        const accessKey = sessionStorage.getItem('accessKey'); 
 
-        if (!accessKey) {
-            $('#btnAgregarEstudiante').hide(); 
-            $('#acciones').hide(); 
-           
-        } else {
-            $('#btnAgregarEstudiante').show(); // Mostrar el botón de agregar estudiante
-            $('#acciones').show(); 
+        function checkAccess() {
+            const accessKey = sessionStorage.getItem('accessKey');
+
+            if (!accessKey) {
+                $('#btnAgregarEstudiante').hide();
+                $('.acciones-col').hide();
+
+            } else {
+                $('#btnAgregarEstudiante').show(); // Mostrar el botón de agregar estudiante
+                $('.acciones-col').show();
+            }
         }
-    }
         $(document).ready(function () {
+            checkAccess();
             let estudianteCedula = ''; // Variable global para almacenar la cédula del estudiante a eliminar
             let estudianteInfo = {}; // Variable para almacenar la información del estudiante a editar
             const url = "http://localhost:8081/ProyectoServicios/Proyecto-Servicios/wwwroot/controllers/apiRest.php";
@@ -349,14 +348,13 @@
                     $('#employeeTable tbody').empty();
                     $.each(data, function (index, row) {
                         var tr = '<tr>' +
-                            '<td><span class="custom-checkbox"><input type="checkbox" id="checkbox' + index + '" name="options[]" value="' + row.estCedula + '"><label for="checkbox' + index + '"></label></span></td>' +
                             '<td>' + row.estCedula + '</td>' +
                             '<td>' + row.estNombre + '</td>' +
                             '<td>' + row.estApellido + '</td>' +
                             '<td>' + row.estDireccion + '</td>' +
                             '<td>' + row.estTelefono + '</td>' +
                             '<td>' + row.curNombre + '</td>' +
-                            '<td id="acciones">' +
+                            '<td class="acciones-col">' +
                             '<a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="' + row.estCedula + '" data-nombre="' + row.estNombre + '" data-apellido="' + row.estApellido + '" data-direccion="' + row.estDireccion + '" data-telefono="' + row.estTelefono + '" data-curid="' + row.curId + '"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>' +
                             '<a href="#deleteEmployeeModal" class="delete-estudiante" data-id="' + row.estCedula + '" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>' +
                             '</td>' +
@@ -365,7 +363,7 @@
                     });
 
                     establecerEventos();
-
+                    checkAccess();
                 } catch (error) {
                     console.log("Error al leer el json", error);
 
@@ -486,14 +484,13 @@
                         $('#employeeTable tbody').empty();
                         $.each(data, function (index, row) {
                             var tr = '<tr>' +
-                                '<td><span class="custom-checkbox"><input type="checkbox" id="checkbox' + index + '" name="options[]" value="' + row.estCedula + '"><label for="checkbox' + index + '"></label></span></td>' +
                                 '<td>' + row.estCedula + '</td>' +
                                 '<td>' + row.estNombre + '</td>' +
                                 '<td>' + row.estApellido + '</td>' +
                                 '<td>' + row.estDireccion + '</td>' +
                                 '<td>' + row.estTelefono + '</td>' +
                                 '<td>' + row.curNombre + '</td>' +
-                                '<td id="acciones">' +
+                                '<td class="acciones-col">' +
                                 '<a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="' + row.estCedula + '" data-nombre="' + row.estNombre + '" data-apellido="' + row.estApellido + '" data-direccion="' + row.estDireccion + '" data-telefono="' + row.estTelefono + '" data-curid="' + row.curId + '"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>' +
                                 '<a href="#deleteEmployeeModal" class="delete-estudiante" data-id="' + row.cedula + '" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>' +
                                 '</td>' +
@@ -502,7 +499,7 @@
                         });
 
                         establecerEventos();
-
+                        checkAccess();
                     } catch (error) {
                         console.log("Error al leer el json", error);
 
@@ -572,19 +569,13 @@
         <table id="employeeTable" class="table table-striped table-hover">
             <thead>
                 <tr>
-                    <th>
-                        <span class="custom-checkbox">
-                            <input type="checkbox" id="selectAll">
-                            <label for="selectAll"></label>
-                        </span>
-                    </th>
                     <th>Cedula</th>
                     <th>Nombre</th>
                     <th>Apellido</th>
                     <th>Direccion</th>
                     <th>Telefono</th>
                     <th>Curso</th>
-                    <th>Acciones</th>
+                    <th class="acciones-col">Acciones</th>
                 </tr>
             </thead>
             <tbody>
