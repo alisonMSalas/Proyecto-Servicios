@@ -290,6 +290,22 @@
     </style>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
+        $(document).ready(function() {
+        checkAccess(); // Verifica el acceso cuando la página se carga
+    });
+
+    function checkAccess() {
+        const accessKey = sessionStorage.getItem('accessKey'); 
+
+        if (!accessKey) {
+            $('#btnAgregarEstudiante').hide(); 
+            $('#acciones').hide(); 
+           
+        } else {
+            $('#btnAgregarEstudiante').show(); // Mostrar el botón de agregar estudiante
+            $('#acciones').show(); 
+        }
+    }
         $(document).ready(function () {
             let estudianteCedula = ''; // Variable global para almacenar la cédula del estudiante a eliminar
             let estudianteInfo = {}; // Variable para almacenar la información del estudiante a editar
@@ -340,7 +356,7 @@
                             '<td>' + row.estDireccion + '</td>' +
                             '<td>' + row.estTelefono + '</td>' +
                             '<td>' + row.curNombre + '</td>' +
-                            '<td>' +
+                            '<td id="acciones">' +
                             '<a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="' + row.estCedula + '" data-nombre="' + row.estNombre + '" data-apellido="' + row.estApellido + '" data-direccion="' + row.estDireccion + '" data-telefono="' + row.estTelefono + '" data-curid="' + row.curId + '"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>' +
                             '<a href="#deleteEmployeeModal" class="delete-estudiante" data-id="' + row.estCedula + '" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>' +
                             '</td>' +
@@ -477,7 +493,7 @@
                                 '<td>' + row.estDireccion + '</td>' +
                                 '<td>' + row.estTelefono + '</td>' +
                                 '<td>' + row.curNombre + '</td>' +
-                                '<td>' +
+                                '<td id="acciones">' +
                                 '<a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="' + row.estCedula + '" data-nombre="' + row.estNombre + '" data-apellido="' + row.estApellido + '" data-direccion="' + row.estDireccion + '" data-telefono="' + row.estTelefono + '" data-curid="' + row.curId + '"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>' +
                                 '<a href="#deleteEmployeeModal" class="delete-estudiante" data-id="' + row.cedula + '" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>' +
                                 '</td>' +
@@ -548,7 +564,7 @@
                         </form>
                     </div>
                     <!--<a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Eliminar Estudiante</span></a>	-->
-                    <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i
+                    <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal" id="btnAgregarEstudiante"><i
                             class="material-icons">&#xE147;</i> <span>Agregar Estudiantes</span></a>
                 </div>
             </div>
