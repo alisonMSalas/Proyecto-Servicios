@@ -1,5 +1,7 @@
 body {
-    background-color: rgb(248, 237, 236);
+    font-family: Arial, sans-serif;
+    font-size: 16px; /* Ajusta el tamaño de la fuente base según tus preferencias */
+    color: #333; /* Color de texto general */
 }
 
 header {
@@ -28,10 +30,28 @@ nav ul li {
     line-height: 50px;
     list-style: none;
 }
+
 nav ul li a {
+    font-family: Arial, sans-serif; 
+    font-size: 16px; 
     color: white;
     text-decoration: none;
 }
+
+#logoutNavButton button {
+    font-family: Arial, sans-serif;
+    font-size: 12px; 
+    color: white;
+    background-color: #dc3545;
+    border: none;
+    padding: 5px 6px; 
+}
+
+#logoutNavButton button:hover {
+    background-color: #c82333; 
+}
+
+
 
 section {
     position: relative;
