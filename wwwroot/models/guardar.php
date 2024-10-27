@@ -7,7 +7,7 @@ $nombre = $_POST['estNombre'];
 $apellido = $_POST['estApellido'];
 $direccion = $_POST['estDireccion'];
 $telefono = $_POST['estTelefono'];
-$curId = $_POST['curId'];
+$curId = $_POST['curNombre'];
 
 $sqlInsert = "INSERT  INTO estudiantes VALUES('$cedula','$nombre','$apellido','$telefono','$direccion','$curId')";
 

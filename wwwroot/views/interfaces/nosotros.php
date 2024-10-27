@@ -308,7 +308,7 @@
             checkAccess();
             let estudianteCedula = ''; // Variable global para almacenar la cédula del estudiante a eliminar
             let estudianteInfo = {}; // Variable para almacenar la información del estudiante a editar
-            const url = "http://localhost:8081/ProyectoServicios/Proyecto-Servicios/wwwroot/controllers/apiRest.php";
+            const url = "http://localhost/ProyectoServicios/Proyecto-Servicios/wwwroot/controllers/apiRest.php";
             cargarTablaEstudiantes();
 
             async function cargarCursos(edicion) {

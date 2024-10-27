@@ -14,7 +14,7 @@ class CrudEd
         $apellido = $_PUT['estApellido'];
         $direccion = $_PUT['estDireccion'];
         $telefono = $_PUT['estTelefono'];
-        $curId = $_PUT['curId'];
+        $curId = $_PUT['curNombre'];
         $sqlEditar = "UPDATE estudiantes SET estNombre='$nombre',estApellido='$apellido',
         estTelefono='$telefono',estDireccion='$direccion',curId='$curId' WHERE estCedula = '$cedula'";
 
