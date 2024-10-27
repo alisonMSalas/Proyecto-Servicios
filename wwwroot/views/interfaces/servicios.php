@@ -62,7 +62,7 @@
                 <input name="estTelefono" class="easyui-textbox" required="true" label="Telefono" style="width:100%">
             </div>
             <div style="margin-bottom:10px">
-                <input id="curId" name="curNombre" class="easyui-combobox" required="true" label="Curso:" style="width:100%" prompt="Seleccione un curso">
+                <input id="curId" name="curId" class="easyui-combobox" required="true" label="Curso:" style="width:100%" prompt="Seleccione un curso">
             </div>
         </form>
     </div>
@@ -93,11 +93,12 @@
 
 
         function newUser() {
-            $('#dlg').dialog('open').dialog('center').dialog('setTitle', 'Nuevo Estudiante');
-            $('#fm').form('clear');
-            cargarCursos();
-            metodo = 'POST';
-        }
+    $('#dlg').dialog('open').dialog('center').dialog('setTitle', 'Nuevo Estudiante');
+    $('#fm').form('clear'); // Limpia el formulario
+    cargarCursos(); // Llama sin parámetros para cargar todos los cursos
+    metodo = 'POST';
+}
+
 
         function editUser() {
             var row = $('#dg').datagrid('getSelected');
@@ -106,7 +107,7 @@
                 $('#dlg').dialog('open').dialog('center').dialog('setTitle', 'Editar Usuario');
                 $('#fm').form('load', row);
 
-                cargarCursos(row.curNombre); // Llama a cargarCursos con el curso actual del estudiante
+                cargarCursos(row.curId); // Llama a cargarCursos con el curso actual del estudiante
 
                 url = "http://localhost/ProyectoServicios/Proyecto-Servicios/wwwroot/controllers/apiRest.php?estCedula=" + row.estCedula;
                 metodo = 'PUT';
@@ -132,6 +133,7 @@
                         } else {
                             $('#dlg').dialog('close');  
                             $('#dg').datagrid('reload');  
+                            location.reload();
                         }
                     } catch (error) {
                         $.messager.show({
@@ -182,22 +184,20 @@
             }
         }
 
-
-        async function cargarCursos(selectedCurso = null) {
-        try {
+        async function cargarCursos(selectedCursoId = null) {
+    try {
         let response = await fetch(`${url}?cursos`);
         let data = await response.json();
 
         $('#curId').combobox({
-            valueField: 'curId',
-            textField: 'curNombre',
+            valueField: 'curId',  // Campo que representa el ID
+            textField: 'curNombre', // Campo que representa el nombre
             data: data,
             onLoadSuccess: function() {
-                // Selecciona el curso actual del estudiante si está en modo edición
-                if (selectedCurso) {
-                    $('#curId').combobox('setValue', selectedCurso);
-                }else{
-                    $('#curId').combobox('clear'); 
+                if (selectedCursoId) {
+                    $('#curId').combobox('setValue', selectedCursoId);
+                } else {
+                    $('#curId').combobox('clear'); // Limpia el valor si no hay curso seleccionado
                 }
             }
         });
@@ -205,6 +205,8 @@
         console.error('Error al cargar los cursos:', error);
     }
 }
+
+
 
         
         function cargarReporte() {
