@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi página</title>
+    <title>Gestión Estudiantes</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/estilos.css" />
 </head>
+
 <body>
     <header>
         <img src="images/banner.png" width="100%" height="25%" />
@@ -32,10 +34,10 @@
         ?>
     </section>
     <footer>Derechos Reservados &copy;Cuarto Software</footer>
-    
+
     <script>
         // Mostrar el botón de cerrar sesión en el navbar si hay sesión iniciada
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             if (sessionStorage.getItem('accessKey')) {
                 document.getElementById('logoutNavButton').style.display = 'inline';
             }
@@ -49,4 +51,5 @@
         }
     </script>
 </body>
+
 </html>

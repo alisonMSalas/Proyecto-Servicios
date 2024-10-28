@@ -308,7 +308,7 @@
             checkAccess();
             let estudianteCedula = ''; // Variable global para almacenar la cédula del estudiante a eliminar
             let estudianteInfo = {}; // Variable para almacenar la información del estudiante a editar
-            const url = "http://localhost/ProyectoServicios/Proyecto-Servicios/wwwroot/controllers/apiRest.php";
+            const url = "http://localhost:8081/ProyectoServicios/Proyecto-Servicios/wwwroot/controllers/apiRest.php";
             cargarTablaEstudiantes();
 
             async function cargarCursos(edicion) {
@@ -538,9 +538,6 @@
             });
 
         });
-
-
-
     </script>
 </head>
 <div class="container-xl">
@@ -552,13 +549,10 @@
                         <h2>Administrador <b>Estudiantes</b></h2>
                     </div>
                     <div class="col-sm-3 d-flex justify-content-end">
-                        <form class="d-flex">
-                            <input type="text" id="buscar-cedula" class="form-control mr-2"
-                                placeholder="Buscar por cédula">
-                            <button id="btn-cedula" class="btn btn-primary" type="button">
-                                <i class="material-icons">search</i> <!-- Icono de lupa -->
-                            </button>
-                        </form>
+                        <input type="text" id="buscar-cedula" class="form-control mr-2" placeholder="Buscar por cédula">
+                        <button id="btn-cedula" class="btn btn-primary" type="button">
+                            <i class="material-icons">search</i> <!-- Icono de lupa -->
+                        </button>
                     </div>
                     <!--<a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Eliminar Estudiante</span></a>	-->
                     <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal" id="btnAgregarEstudiante"><i

@@ -14,7 +14,7 @@
 
 <body class="bg-light">
     <div class="container">
-        <div class="row justify-content-center" style="height: 100vh; margin-top:-150px">
+        <div class="row justify-content-center" style="margin-top:60px;margin-bottom:60px">
             <div class="col-md-4 my-auto">
                 <div class="card">
                     <div class="card-header text-center">
@@ -24,15 +24,18 @@
                         <form id="loginForm" onsubmit="event.preventDefault(); loginUser();">
                             <div class="form-group">
                                 <label for="usuario">Usuario</label>
-                                <input type="text" id="usuario" class="form-control" placeholder="Ingrese su usuario" required>
+                                <input type="text" id="usuario" class="form-control" placeholder="Ingrese su usuario"
+                                    required>
                             </div>
                             <div class="form-group">
                                 <label for="password">Contraseña</label>
-                                <input type="password" id="password" class="form-control" placeholder="Ingrese su contraseña" required>
+                                <input type="password" id="password" class="form-control"
+                                    placeholder="Ingrese su contraseña" required>
                             </div>
                             <button type="submit" class="btn btn-primary btn-block">Iniciar Sesión</button>
                         </form>
-                        <button id="logoutButton" class="btn btn-danger btn-block mt-3" style="display:none;" onclick="logoutUser()">Cerrar Sesión</button>
+                        <button id="logoutButton" class="btn btn-danger btn-block mt-3" style="display:none;"
+                            onclick="logoutUser()">Cerrar Sesión</button>
                     </div>
                 </div>
             </div>
@@ -41,7 +44,7 @@
 
     <script>
         // Verificar el estado de sesión al cargar la página
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             if (sessionStorage.getItem('accessKey')) {
                 showLogoutButton();
                 cerrarformulario();
@@ -52,47 +55,47 @@
             var username = document.getElementById('usuario').value;
             var password = document.getElementById('password').value;
 
-            fetch('http://localhost/ProyectoServicios/Proyecto-Servicios/wwwroot/controllers/apiRest.php', {
+            fetch('http://localhost:8081/ProyectoServicios/Proyecto-Servicios/wwwroot/controllers/apiRest.php', {
                 method: 'POST',
                 body: new URLSearchParams({
                     nombre_user: username,
                     contrasenia_user: password
                 })
             })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Error en la red');
-                }
-                return response.json();
-            })
-            .then(result => {
-                console.log(result);
-                if (result == 'Bienvenido') {
-                    sessionStorage.setItem('accessKey', "Logueado");
-                    alert('Login exitoso');
-                    window.location.href = 'index.php?action=nosotros';
-                    showLogoutButton(); // Mostrar el botón de cerrar sesión
-                    cerrarformulario();
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error en la red');
+                    }
+                    return response.json();
+                })
+                .then(result => {
+                    console.log(result);
+                    if (result == 'Bienvenido') {
+                        sessionStorage.setItem('accessKey', "Logueado");
+                        alert('Login exitoso');
+                        window.location.href = 'index.php?action=nosotros';
+                        showLogoutButton(); // Mostrar el botón de cerrar sesión
+                        cerrarformulario();
 
-                    
-                } else {
+
+                    } else {
+                        alert('Error al intentar iniciar sesión');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al intentar iniciar sesión:', error);
                     alert('Error al intentar iniciar sesión');
-                }
-            })
-            .catch(error => {
-                console.error('Error al intentar iniciar sesión:', error);
-                alert('Error al intentar iniciar sesión');
-            });
+                });
         }
 
         function showLogoutButton() {
             document.getElementById('logoutButton').style.display = 'block';
         }
-        function cerrarformulario(){
-            document.getElementById('loginForm').style.display ='none';
+        function cerrarformulario() {
+            document.getElementById('loginForm').style.display = 'none';
         }
 
-        function mostrarformulario(){
+        function mostrarformulario() {
             document.getElementById('loginForm').style.display = 'block';
         }
 
